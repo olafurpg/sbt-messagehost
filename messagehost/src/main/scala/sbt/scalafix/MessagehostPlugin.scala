@@ -27,7 +27,7 @@ object MessagehostPlugin extends AutoPlugin {
         .in(compile)
         .value
         .orElse(Some(new LoggerReporter(10, logger)))
-      val sourceRoot = baseDirectory.value.toPath
+      val sourceRoot = baseDirectory.in(ThisBuild).value.toPath
       val targetRoot = classDirectory.value.toPath
       Some(new MessagehostReporter(logger, parent, sourceRoot, targetRoot))
     }
