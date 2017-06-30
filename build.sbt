@@ -14,6 +14,7 @@ lazy val messagehost = project
   )
 
 lazy val allSettings = List(
+  organization := "com.geirsson",
   version := sys.props.getOrElse("messagehost.version", version.value),
   triggeredMessage in ThisBuild := Watched.clearWhenTriggered,
   scalacOptions ++= compilerOptions,
