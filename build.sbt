@@ -1,5 +1,7 @@
 import com.trueaccord.scalapb.compiler.Version.scalapbVersion
 
+name := "messagehostRoot"
+
 lazy val messagehost = project
   .settings(
     allSettings,
@@ -8,7 +10,7 @@ lazy val messagehost = project
     sbtPlugin := true,
     scalaVersion := scala210,
     crossScalaVersions := Seq(scala210),
-    moduleName := "messagehost"
+    moduleName := "sbt-messagehost"
   )
 
 lazy val allSettings = List(
