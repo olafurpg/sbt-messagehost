@@ -48,7 +48,10 @@ class MessagehostReporter(logger: Logger,
     if (pos.sourceFile().isDefined) {
       val path = sourceRoot.relativize(pos.sourceFile().get().toPath)
       val attrs =
-        messages.getOrElseUpdate(path, Attributes(filename = path.toString))
+        messages.getOrElseUpdate(path, {
+          val contents = new String(Files.readAllBytes(path))
+          Attributes(filename = path.toString, contents = contents)
+        })
       val range =
         if (pos.offset().isDefined)
           Some(Range(pos.offset().get(), pos.offset().get()))
