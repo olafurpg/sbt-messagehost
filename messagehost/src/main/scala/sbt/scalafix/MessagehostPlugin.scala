@@ -50,7 +50,11 @@ class MessagehostReporter(logger: Logger,
       val attrs =
         messages.getOrElseUpdate(path, {
           val contents = new String(Files.readAllBytes(path))
-          Attributes(filename = path.toString, contents = contents)
+          Attributes(
+            filename = path.toString,
+            dialect = "Scala211",
+            contents = contents
+          )
         })
       val range =
         if (pos.offset().isDefined)
