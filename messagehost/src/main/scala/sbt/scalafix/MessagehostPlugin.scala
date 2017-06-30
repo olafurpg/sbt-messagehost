@@ -27,7 +27,6 @@ object MessagehostPlugin extends AutoPlugin {
         .in(compile)
         .value
         .orElse(Some(new LoggerReporter(10, logger)))
-      logger.info(s"parent = $parent")
       val sourceRoot = baseDirectory.value.toPath
       val targetRoot = classDirectory.value.toPath
       Some(new MessagehostReporter(logger, parent, sourceRoot, targetRoot))
@@ -45,10 +44,7 @@ class MessagehostReporter(logger: Logger,
 
   def database: Database = Database(messages.values.toSeq)
   override def log(pos: Position, msg: String, sev: Severity): Unit = {
-    logger.info(s"log $msg")
     parent.foreach(_.log(pos, msg, sev))
-    logger.info(s"sourcefile = ${pos.sourceFile().isDefined}")
-    logger.info(s"sourcepath = ${pos.sourcePath().isDefined}")
     if (pos.sourceFile().isDefined) {
       val path = sourceRoot.relativize(pos.sourceFile().get().toPath)
       val attrs =
@@ -66,13 +62,11 @@ class MessagehostReporter(logger: Logger,
     }
   }
   override def reset(): Unit = {
-    logger.info(s"RESET")
     parent.foreach(_.reset())
     messages.clear()
   }
 
   override def printSummary(): Unit = {
-    logger.info(s"PRINT SUMMARY")
     parent.foreach(_.printSummary())
     val root = targetRoot.resolve("META-INF").resolve("semanticdb")
     database.entries.foreach { attrs =>
