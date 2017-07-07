@@ -6,7 +6,7 @@ addSbtPlugin("org.xerial.sbt"   % "sbt-sonatype"        % "1.1")
 addSbtPlugin("me.lessis"        % "bintray-sbt"         % "0.3.0")
 addSbtPlugin("com.dwijnand"     % "sbt-dynver"          % "1.2.0")
 addSbtPlugin(
-  "com.thesamet" % "sbt-protoc" % "0.99.6" exclude ("com.trueaccord.scalapb", "protoc-bridge_2.10"))
-libraryDependencies += "com.trueaccord.scalapb" %% "compilerplugin-shaded" % "0.6.0-pre5"
+  "com.thesamet" % "sbt-protoc" % "0.99.11" exclude ("com.trueaccord.scalapb", "protoc-bridge_2.10"))
+libraryDependencies += "com.trueaccord.scalapb" %% "compilerplugin-shaded" % "0.6.0"
 
 libraryDependencies += "org.scala-sbt" % "scripted-plugin" % sbtVersion.value
